@@ -34,15 +34,12 @@ class TestResult:
 
 class WasRun(TestCase):
     def __init__(self, name):
-        self.wasRun= None
         TestCase.__init__(self, name)
 
     def testMethod(self):
-        self.wasRun = 1
         self.log += "testMethod "
 
     def setUp(self):
-        self.wasRun = None
         self.log = "setUp "
 
     def tearDown(self):
@@ -64,7 +61,6 @@ class TestSuite:
 
 class TestCaseTest(TestCase):
     def setUp(self):
-        self.test= WasRun("testMethod")
         self.result = TestResult()
 
     def testTemplateMethod(self):
