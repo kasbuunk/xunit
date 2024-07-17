@@ -47,15 +47,26 @@ class TestCaseTest(TestCase):
         result = test.run()
         assert("1 run, 0 failed" == result.summary())
 
+    def testFailedResultFormatting(self):
+        result = TestResult()
+        result.testStarted()
+        result.testFailed()
+        assert("1 run, 1 failed" == result.summary())
+
 class TestResult:
     def __init__(self):
         self.runCount = 0
+        self.failCount = 0
 
     def testStarted(self):
         self.runCount += 1
 
+    def testFailed(self):
+        self.failCount += 1
+
     def summary(self):
-        return "%d run, 0 failed" % self.runCount
+        return "%d run, %d failed" % (self.runCount, self.failCount)
 
 TestCaseTest("testTemplateMethod").run()
 TestCaseTest("testResult").run()
+TestCaseTest("testFailedResultFormatting").run()
